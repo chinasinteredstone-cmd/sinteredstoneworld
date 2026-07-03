@@ -544,5 +544,43 @@ lightbox.onclick = e => { if (e.target === lightbox) { lightbox.classList.remove
 const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.05 });
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 </script>
+
+<!-- GA4 Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-XXXXXXXXXX', { send_page_view: true });
+
+// === 自定义事件追踪 ===
+// whatsapp_click: 任何 WhatsApp 链接点击
+document.addEventListener('click', function(e){
+  var t = e.target.closest('a');
+  if(!t) return;
+  var href = t.getAttribute('href') || '';
+  if(href.indexOf('wa.me') >= 0 || href.indexOf('whatsapp') >= 0 || t.classList.contains('ch-wa') || t.classList.contains('fi-wa') || t.classList.contains('lb-wa') || t.classList.contains('im-wa')){
+    gtag('event', 'whatsapp_click', { 'event_category': 'inquiry', 'event_label': 'whatsapp', 'value': 1 });
+  }
+  // email_click: mailto 链接
+  if(href.indexOf('mailto:') >= 0){
+    gtag('event', 'email_click', { 'event_category': 'inquiry', 'event_label': 'email', 'value': 1 });
+  }
+  // catalogue_download: 画册页访问（代理事件）
+  if(href.indexOf('/catalog') >= 0 || t.classList.contains('catalogue-link')){
+    gtag('event', 'catalogue_download', { 'event_category': 'engagement', 'event_label': 'catalogue', 'value': 1 });
+  }
+}, true);
+
+// contact_form_submit: 所有表单提交（Formspree / 申请表单 / 询盘弹窗）
+document.addEventListener('submit', function(e){
+  var form = e.target;
+  if(form && (form.getAttribute('action') || '').indexOf('formspree') >= 0){
+    gtag('event', 'contact_form_submit', { 'event_category': 'inquiry', 'event_label': 'form_submit', 'value': 1 });
+  }
+}, true);
+
+// page_view 由 gtag('config') 自动发送，无需手动
+</script>
 </body>
 </html>
