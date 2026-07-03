@@ -1,0 +1,28 @@
+# ===== 敏感信息（绝不推送）=====
+marketing/scripts/config.local.js
+marketing/scripts/*.token
+marketing/scripts/tokens/
+*.env
+.env*
+
+# ===== 依赖 =====
+marketing/node_modules/
+node_modules/
+
+# ===== 营销生成素材（体积大，不入仓库）=====
+# 注：如想备份素材，可单独用 Git LFS 或单独分支
+marketing/alibaba/main-images/
+marketing/alibaba/detail-pages/
+marketing/xiaohongshu/*/
+marketing/xiaohongshu/*.jpg
+
+# ===== 系统/编辑器 =====
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# ===== 临时文件 =====
+marketing/**/_preview_*.jpg
+marketing/**/*.tmp

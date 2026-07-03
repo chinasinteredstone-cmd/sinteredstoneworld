@@ -1,0 +1,2729 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>小红书素材库 - 200款产品</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Microsoft YaHei",Arial,sans-serif; background:#f5f5f5; color:#1a1a1a; padding:20px; }
+  h1 { text-align:center; font-weight:300; letter-spacing:2px; margin-bottom:6px; }
+  .sub { text-align:center; color:#888; font-size:13px; margin-bottom:24px; }
+  .toolbar { position:sticky; top:0; background:rgba(255,255,255,0.97); backdrop-filter:blur(8px); padding:14px 20px; border-radius:8px; margin-bottom:20px; display:flex; gap:10px; flex-wrap:wrap; justify-content:center; align-items:center; z-index:100; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+  .toolbar label { color:#666; font-size:13px; }
+  select, input { padding:7px 12px; border:1px solid #ddd; background:#fff; color:#333; border-radius:6px; font-size:13px; }
+  .stats { color:#ff2442; font-size:13px; margin-left:auto; font-weight:600; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; max-width:1600px; margin:0 auto; }
+  .card { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.06); cursor:pointer; transition:transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,0.12); }
+  .card.hidden { display:none; }
+  .cover-wrap { position:relative; aspect-ratio:3/4; background:#1a1a1a; }
+  .cover-wrap img { width:100%; height:100%; object-fit:cover; }
+  .img-count { position:absolute; top:8px; right:8px; background:rgba(255,36,66,0.9); color:#fff; padding:3px 9px; border-radius:12px; font-size:11px; }
+  .card-info { padding:12px 14px; }
+  .card-title { font-size:14px; font-weight:600; line-height:1.4; margin-bottom:4px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .card-meta { font-size:11px; color:#999; }
+  .tag { display:inline-block; padding:2px 7px; border-radius:8px; font-size:10px; margin-right:4px; }
+  .tag-slab { background:#fff0f0; color:#c0392b; }
+  .tag-furniture { background:#fff5e6; color:#d35400; }
+  .tag-accessory { background:#eef6ff; color:#2980b9; }
+  .tag-case { background:#f0f0f0; color:#7f8c8d; }
+  /* 详情弹窗 */
+  .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); z-index:1000; padding:30px; overflow:auto; }
+  .modal-bg.show { display:flex; gap:20px; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
+  .modal-bg img { max-height:90vh; border-radius:8px; box-shadow:0 0 30px rgba(0,0,0,0.5); }
+  .modal-close { position:fixed; top:20px; right:30px; color:#fff; font-size:36px; cursor:pointer; background:rgba(0,0,0,0.5); width:50px; height:50px; border-radius:50%; display:flex; align-items:center; justify-content:center; line-height:1; }
+</style>
+</head>
+<body>
+
+<h1>小红书素材库 · 奢石世界</h1>
+<p class="sub">200 款产品 · 3:4 竖图 1242×1656 · 封面+内页 · 2026-07-03</p>
+
+<div class="toolbar">
+  <label>板块:</label>
+  <select id="filterL1" onchange="applyFilter()">
+    <option value="">全部</option>
+    <option value="slab">奢石大板</option>
+    <option value="furniture">成品家具</option>
+    <option value="accessory">配件脚架</option>
+    <option value="case">落地案例</option>
+  </select>
+  <label>品类:</label>
+  <select id="filterCat" onchange="applyFilter()">
+    <option value="">全部</option>
+  </select>
+  <label>搜索:</label>
+  <input type="text" id="searchBox" placeholder="产品名/ID..." oninput="applyFilter()" style="width:140px;">
+  <span class="stats" id="stats"></span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="modal-bg" id="modal" onclick="closeModal()">
+  <div class="modal-close" onclick="closeModal()">×</div>
+  <div id="modalContent" style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;"></div>
+</div>
+
+<script>
+const PRODUCTS = [
+  {
+    "id": "1394292",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉YSL3162",
+    "titleEn": "Pandora",
+    "size": "1636×2181mm",
+    "xhsTitle": "别墅同款潘多拉｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1455101",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL3128",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！潘多拉背景墙实景",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1405177",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL124",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款潘多拉｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg",
+      "5.jpg"
+    ]
+  },
+  {
+    "id": "1434540",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL124",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "潘多拉奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1568940",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL250703",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "潘多拉奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg"
+    ]
+  },
+  {
+    "id": "1391430",
+    "l1": "slab",
+    "cat": "Blue Emerald",
+    "title": "FL627 蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "蓝翡翠奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1405236",
+    "l1": "furniture",
+    "cat": "Blue Emerald",
+    "title": "蓝翡翠1600X900",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的蓝翡翠！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1407109",
+    "l1": "furniture",
+    "cat": "Blue Emerald",
+    "title": "蓝翡翠1400X800",
+    "titleEn": "Blue Emerald",
+    "size": "2316×3088mm",
+    "xhsTitle": "蓝翡翠实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1460968",
+    "l1": "slab",
+    "cat": "Blue Emerald",
+    "title": "FL09蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "蓝翡翠烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1434280",
+    "l1": "slab",
+    "cat": "Blue Emerald",
+    "title": "FL02蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "蓝翡翠奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1391465",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰6081",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "xhsTitle": "雪山兰奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg",
+      "5.jpg"
+    ]
+  },
+  {
+    "id": "1434728",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰6081",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "xhsTitle": "雪山兰烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1396589",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰FL6081",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！雪山兰大板实景分享",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1394259",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰 4049",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！雪山兰大板实景分享",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1394262",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰 552",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款雪山兰｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg",
+      "5.jpg"
+    ]
+  },
+  {
+    "id": "1531054",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "B42客椅",
+    "titleEn": "Dining Chair",
+    "size": "453×472mm",
+    "xhsTitle": "奢石餐椅搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1531058",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "B48客椅",
+    "titleEn": "Dining Chair",
+    "size": "1063×1171mm",
+    "xhsTitle": "奢石餐椅搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1532942",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "C709",
+    "titleEn": "Dining Chair",
+    "size": "1336×1279mm",
+    "xhsTitle": "奢石餐椅搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1531057",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "B49客椅",
+    "titleEn": "Dining Chair",
+    "size": "543×446mm",
+    "xhsTitle": "奢石餐椅选款指南，建议收藏",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1532924",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "茶椅",
+    "titleEn": "Dining Chair",
+    "size": "2000×2666mm",
+    "xhsTitle": "奢石餐椅搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1530002",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "YCA6050",
+    "titleEn": "Tea Table",
+    "size": "606×362mm",
+    "xhsTitle": "奢石茶几搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1530001",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "YCA6089",
+    "titleEn": "Tea Table",
+    "size": "1073×889mm",
+    "xhsTitle": "奢石茶几选款指南，建议收藏",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1531037",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "FS-CJ02茶几",
+    "titleEn": "Tea Table",
+    "size": "1284×1262mm",
+    "xhsTitle": "奢石茶几选款指南，建议收藏",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1617162",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "盒子茶几底座",
+    "titleEn": "Tea Table",
+    "size": "1702×1276mm",
+    "xhsTitle": "奢石茶几搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1531030",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "FS-CJ11 茶几",
+    "titleEn": "Tea Table",
+    "size": "497×349mm",
+    "xhsTitle": "奢石茶几搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1537784",
+    "l1": "furniture",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉800X1600",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "皇家白玉实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg"
+    ]
+  },
+  {
+    "id": "1568952",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉1328",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款皇家白玉｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1461452",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉HW-133",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款皇家白玉｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1525712",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉HW1328",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款皇家白玉｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1467005",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉HW1240",
+    "titleEn": "Royal White Jade",
+    "size": "1706×1279mm",
+    "xhsTitle": "皇家白玉奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1407734",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "宝格丽紫2200X1050",
+    "titleEn": "Dining Table",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石餐桌实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1405237",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "潘多拉980*2000",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石餐桌推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1405301",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "百达翡翠1800X900",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石餐桌！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1405238",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "金枝玉叶2000X1000",
+    "titleEn": "Golden Branch Jade Leaf",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石餐桌，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1405242",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "SK27Y10200046 潘多拉2000X1000",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石餐桌推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1441821",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1526×1040mm",
+    "xhsTitle": "奢石背景墙完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1441807",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1616×1170mm",
+    "xhsTitle": "奢石背景墙完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1441815",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1080×847mm",
+    "xhsTitle": "奢石背景墙完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1441816",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1080×883mm",
+    "xhsTitle": "奢石背景墙实景落地｜效果绝了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1441810",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1080×905mm",
+    "xhsTitle": "奢石背景墙实景落地｜效果绝了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1431742",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠 660*1000",
+    "titleEn": "Blue Emerald",
+    "size": "1280×1707mm",
+    "xhsTitle": "奢石茶几推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1432059",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "潘多拉600*1200",
+    "titleEn": "Pandora",
+    "size": "1280×1707mm",
+    "xhsTitle": "奢石茶几实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1463321",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "新芬迪白6001200",
+    "titleEn": "Fendi White",
+    "size": "421×593mm",
+    "xhsTitle": "被邻居追着问的奢石茶几！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1463211",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "云母绿茶几600X1200",
+    "titleEn": "Mica Green",
+    "size": "432×577mm",
+    "xhsTitle": "被邻居追着问的奢石茶几！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1466391",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "宝格丽黑1400X800",
+    "titleEn": "Bulgari Black",
+    "size": "432×577mm",
+    "xhsTitle": "被邻居追着问的奢石茶几！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1568950",
+    "l1": "slab",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠HR297",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1591491",
+    "l1": "slab",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠684",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！奢石背景墙实景",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1387919",
+    "l1": "furniture",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠航母茶台900*4500",
+    "titleEn": "Patek Emerald",
+    "size": "2000×2666mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1405535",
+    "l1": "furniture",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠1800X900",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1673611",
+    "l1": "furniture",
+    "cat": "Patek Emerald",
+    "title": "Y150B130+Y90B131 百达翡翠150+90",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1431745",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "蓝翡翠  400*1500",
+    "titleEn": "Blue Emerald",
+    "size": "1280×1280mm",
+    "xhsTitle": "奢石玄关柜｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1432050",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "潘多拉 400*1400",
+    "titleEn": "Pandora",
+    "size": "1280×1707mm",
+    "xhsTitle": "奢石玄关柜｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1431746",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "蓝翡翠 400*1500",
+    "titleEn": "Blue Emerald",
+    "size": "1280×1280mm",
+    "xhsTitle": "被邻居追着问的奢石玄关柜！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1439079",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "潘多拉   400*1400",
+    "titleEn": "Pandora",
+    "size": "2000×2666mm",
+    "xhsTitle": "奢石玄关柜实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1793691",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "新芬迪白2600*400",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石玄关柜！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1819628",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "蓝翡翠茶车400X900",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石茶水柜，轻奢必备",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1797801",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "潘多拉400X900",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石茶水柜！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1462834",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "牛油果绿400X900",
+    "titleEn": "Avocado Green",
+    "size": "375×666mm",
+    "xhsTitle": "奢石茶水柜实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1491687",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "香格里拉茶车",
+    "titleEn": "Shangri-La",
+    "size": "432×577mm",
+    "xhsTitle": "奢石茶水柜推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1466424",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "宝格丽紫40X90",
+    "titleEn": "Tea Cart",
+    "size": "433×577mm",
+    "xhsTitle": "奢石茶水柜实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1423815",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻FL- 1212",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "xhsTitle": "铂金钻石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1423817",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻FL- 1145",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款铂金钻石｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1405311",
+    "l1": "furniture",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻2000X1000",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的铂金钻石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1423369",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻1212",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！铂金钻石大板实景分享",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1423816",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻黄底",
+    "titleEn": "Platinum Diamond",
+    "size": "1702×1276mm",
+    "xhsTitle": "被问疯了！铂金钻石背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1423371",
+    "l1": "slab",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑",
+    "titleEn": "Bulgari Black",
+    "size": "2000×2666mm",
+    "xhsTitle": "被问疯了！宝格丽黑背景墙实景",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1423370",
+    "l1": "slab",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑230906",
+    "titleEn": "Bulgari Black",
+    "size": "1920×1080mm",
+    "xhsTitle": "宝格丽黑奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1403722",
+    "l1": "furniture",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑800X1400",
+    "titleEn": "Bulgari Black",
+    "size": "2000×1500mm",
+    "xhsTitle": "宝格丽黑推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1407110",
+    "l1": "furniture",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑1800X900",
+    "titleEn": "Bulgari Black",
+    "size": "3024×4032mm",
+    "xhsTitle": "宝格丽黑｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1803510",
+    "l1": "furniture",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑180+118",
+    "titleEn": "Bulgari Black",
+    "size": "2000×1500mm",
+    "xhsTitle": "宝格丽黑｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403706",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕900X1600",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的威尼斯棕！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1394289",
+    "l1": "slab",
+    "cat": "Venice Brown",
+    "title": "威尼斯灰",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！威尼斯棕大板实景分享",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1403970",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕1600X900",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "xhsTitle": "威尼斯棕｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1778436",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕900X1800",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的威尼斯棕！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1405614",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕1600X900",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "xhsTitle": "威尼斯棕实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1591017",
+    "l1": "slab",
+    "cat": "Fendi White",
+    "title": "芬迪白FFF-PYD705",
+    "titleEn": "Fendi White",
+    "size": "1789×1280mm",
+    "xhsTitle": "别墅同款芬迪白｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1405141",
+    "l1": "furniture",
+    "cat": "Fendi White",
+    "title": "芬迪白1800X900",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的芬迪白！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1436291",
+    "l1": "slab",
+    "cat": "Fendi White",
+    "title": "芬迪白FL1080",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！芬迪白背景墙实景",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1591426",
+    "l1": "furniture",
+    "cat": "Fendi White",
+    "title": "100200F033芬迪白1000X2000",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的芬迪白！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1481470",
+    "l1": "slab",
+    "cat": "Fendi White",
+    "title": "新芬迪白HU01335",
+    "titleEn": "Fendi White",
+    "size": "2100×1576mm",
+    "xhsTitle": "芬迪白奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1394278",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿FL0607",
+    "titleEn": "Amazon Green",
+    "size": "1636×2181mm",
+    "xhsTitle": "亚马逊绿烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1394282",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿FL0001",
+    "titleEn": "Amazon Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款亚马逊绿｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1427071",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿FLKMR",
+    "titleEn": "Amazon Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！亚马逊绿背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1397964",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿NXYMXL24020",
+    "titleEn": "Amazon Green",
+    "size": "2181×1636mm",
+    "xhsTitle": "颜值暴击！亚马逊绿大板实景分享",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1427072",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿24025",
+    "titleEn": "Amazon Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款亚马逊绿｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1480572",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石茶几推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1478487",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "芬迪白",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石茶几推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1480571",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石茶几！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1432058",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "潘多拉 600*1200",
+    "titleEn": "Pandora",
+    "size": "4032×3024mm",
+    "xhsTitle": "一眼爱上的奢石茶几，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1478475",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠700X1400",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石茶几｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403971",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶1600X900",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1391281",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶180x90",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1632761",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "红153/175 蓝水晶150+90",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403882",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶2200X1000",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1408499",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶1600X900",
+    "titleEn": "Blue Crystal",
+    "size": "2000×2666mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1427495",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "大花白2349",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1523981",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "大花白9266",
+    "titleEn": "White Flower",
+    "size": "2100×1576mm",
+    "xhsTitle": "被问疯了！奢石背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1925430",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "2336-9261大花白 3X1.56/2.97X1.54",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1960981",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "150705 大花白2.76*1.7",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！奢石背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1819624",
+    "l1": "furniture",
+    "cat": "White Flower",
+    "title": "大花白75+130",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1530635",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "FS-XG01 月亮玄关",
+    "titleEn": "Console",
+    "size": "315×248mm",
+    "xhsTitle": "奢石玄关柜选款指南，建议收藏",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1529998",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "LV玄关",
+    "titleEn": "Console",
+    "size": "845×531mm",
+    "xhsTitle": "奢石玄关柜搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1533665",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "玄关底座",
+    "titleEn": "Console",
+    "size": "248×261mm",
+    "xhsTitle": "奢石玄关柜选款指南，建议收藏",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1532949",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "YCZ9119 玄关",
+    "titleEn": "Console",
+    "size": "1080×1440mm",
+    "xhsTitle": "奢石玄关柜选款指南，建议收藏",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1530000",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "YCZ9117 玄关",
+    "titleEn": "Console",
+    "size": "1076×1064mm",
+    "xhsTitle": "奢石玄关柜搭配｜装修细节加分项",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1537608",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "水滴型餐桌 (2)",
+    "titleEn": "Dining Table",
+    "size": "1080×1920mm",
+    "xhsTitle": "奢石餐桌实景落地｜效果绝了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1425685",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (29)",
+    "titleEn": "Dining Table",
+    "size": "1284×1669mm",
+    "xhsTitle": "奢石餐桌完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1425686",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (26)",
+    "titleEn": "Dining Table",
+    "size": "1284×1678mm",
+    "xhsTitle": "奢石餐桌实景落地｜效果绝了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1425687",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (23)",
+    "titleEn": "Dining Table",
+    "size": "1284×1630mm",
+    "xhsTitle": "奢石餐桌完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1425684",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (31)",
+    "titleEn": "Dining Table",
+    "size": "1284×1681mm",
+    "xhsTitle": "奢石餐桌实景落地｜效果绝了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1525625",
+    "l1": "slab",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金241",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "xhsTitle": "宇宙金奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1669633",
+    "l1": "furniture",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金150+90",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的宇宙金，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1568945",
+    "l1": "slab",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金241",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "xhsTitle": "宇宙金奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1568946",
+    "l1": "slab",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金241",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！宇宙金背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1705208",
+    "l1": "furniture",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金150+87",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×2666mm",
+    "xhsTitle": "一眼爱上的宇宙金，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1593654",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y135F040+Y80F041 芬迪绿135+80",
+    "titleEn": "Fendi Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "2027869",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "90180Y779 云母绿180*90",
+    "titleEn": "Mica Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1720336",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y135Y259+Y80Y260 云母绿135+80",
+    "titleEn": "Mica Green",
+    "size": "577×432mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1901655",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y135Y559+Y80Y560 云母绿135+80",
+    "titleEn": "Mica Green",
+    "size": "2000×2000mm",
+    "xhsTitle": "奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1833321",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y150Y475+Y90Y476 云母绿150+90",
+    "titleEn": "Mica Green",
+    "size": "2000×2000mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1425491",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (5)",
+    "titleEn": "Luxury Stone",
+    "size": "1284×1671mm",
+    "xhsTitle": "天然奢石完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg"
+    ]
+  },
+  {
+    "id": "1425484",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (26)",
+    "titleEn": "Luxury Stone",
+    "size": "1284×1667mm",
+    "xhsTitle": "天然奢石实景落地｜效果绝了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1425485",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (23)",
+    "titleEn": "Luxury Stone",
+    "size": "1283×1676mm",
+    "xhsTitle": "天然奢石完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1425487",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (19)",
+    "titleEn": "Luxury Stone",
+    "size": "1283×1659mm",
+    "xhsTitle": "天然奢石完工案例，设计还原度100%",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1425488",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (16)",
+    "titleEn": "Luxury Stone",
+    "size": "1284×1647mm",
+    "xhsTitle": "天然奢石实景落地｜效果绝了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1925317",
+    "l1": "slab",
+    "cat": "Prada Green",
+    "title": "20260412#04 普拉达绿3X1.72",
+    "titleEn": "Prada Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款普拉达绿｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1391331",
+    "l1": "furniture",
+    "cat": "Prada Green",
+    "title": "普拉达绿1240*2200",
+    "titleEn": "Prada Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的普拉达绿！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1458908",
+    "l1": "furniture",
+    "cat": "Prada Green",
+    "title": "普拉达绿700X1300",
+    "titleEn": "Prada Green",
+    "size": "432×577mm",
+    "xhsTitle": "一眼爱上的普拉达绿，轻奢必备",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1999809",
+    "l1": "slab",
+    "cat": "Prada Green",
+    "title": "JY1128普拉达绿",
+    "titleEn": "Prada Green",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！普拉达绿大板实景分享",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1458906",
+    "l1": "furniture",
+    "cat": "Prada Green",
+    "title": "普拉达绿140+80",
+    "titleEn": "Prada Green",
+    "size": "577×432mm",
+    "xhsTitle": "被邻居追着问的普拉达绿！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1405618",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "宝格丽紫2000X1000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的天然奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1574132",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "卡里冰玉1000*2000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1391226",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "潘多拉1000*2000",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的天然奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1457983",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "宝格丽紫1000*2000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的天然奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403948",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "猫眼绿2000X1000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的天然奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1423797",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "卡里冰玉",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款天然奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1553872",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "卡里冰玉2.385X0.65X1.235X1.155",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款天然奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1777414",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "卡里冰玉900X1800",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1892656",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "SKF8016K04 卡里冰玉160X80",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的天然奢石！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1553878",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "卡里冰玉2.325X0.6X1.4X0.9",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1701178",
+    "l1": "slab",
+    "cat": "Blue Sky Jade",
+    "title": "蓝天玉FL01",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1927787",
+    "l1": "furniture",
+    "cat": "Blue Sky Jade",
+    "title": "Y194L590+Y125L591 蓝天玉194+125",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1982798",
+    "l1": "furniture",
+    "cat": "Blue Sky Jade",
+    "title": "Y135L679+Y80L680 蓝天玉135+80",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×2000mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1925375",
+    "l1": "slab",
+    "cat": "Blue Sky Jade",
+    "title": "FL-01蓝天白云（蓝天玉）3.28X1.95/3.26X1.97",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "2005274",
+    "l1": "furniture",
+    "cat": "Blue Sky Jade",
+    "title": "Y150L729+Y90L730 蓝天玉150+90",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1405608",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐1800X860",
+    "titleEn": "Snow Fox",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1555681",
+    "l1": "slab",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐",
+    "titleEn": "Snow Fox",
+    "size": "2000×2666mm",
+    "xhsTitle": "被问疯了！奢石背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1924519",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "Y135X421+Y80X422 雪山飞狐135+80",
+    "titleEn": "Snow Fox",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1574130",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐1000*2000",
+    "titleEn": "Snow Fox",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1458581",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐1000+2000",
+    "titleEn": "Snow Fox",
+    "size": "432×577mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1385688",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠150+90转盘",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的天然奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1385453",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠150+80",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的天然奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1594565",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠150+80",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403580",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠160+90",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403493",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "古木纹150+90",
+    "titleEn": "Wood Grain",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的天然奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1461445",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀FLXS250601",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1525627",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀FLXS250601",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg"
+    ]
+  },
+  {
+    "id": "1701163",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀FL139",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg"
+    ]
+  },
+  {
+    "id": "1793452",
+    "l1": "furniture",
+    "cat": "Golden Peacock",
+    "title": "金孔雀900*1600",
+    "titleEn": "Golden Peacock",
+    "size": "2000×2666mm",
+    "xhsTitle": "奢石推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1553575",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1394320",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "宝格丽紫HY23",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1568951",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "宝格丽紫HY45",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！天然奢石背景墙实景",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1481472",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "宝格丽紫",
+    "titleEn": "Luxury Stone",
+    "size": "2100×1576mm",
+    "xhsTitle": "别墅同款天然奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1794732",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "宝保丽紫1195X1195",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "2104060",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "HY45宝格丽紫 3050*1930",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1807324",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "Y135B389+Y80B390 白冰玉135+80",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1889366",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "Y150B393+Y90B394 白冰玉150+90",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1985333",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "100200B695 白冰玉200X100",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "2078147",
+    "l1": "slab",
+    "cat": "White Ice Jade",
+    "title": "白冰玉1.65X0.74",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "2080548",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "白冰玉150+90",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1396598",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅YT0321",
+    "titleEn": "Luxury Stone",
+    "size": "1636×2181mm",
+    "xhsTitle": "天然奢石烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1555644",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！天然奢石大板实景分享",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1644319",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "4096×3500mm",
+    "xhsTitle": "颜值暴击！天然奢石大板实景分享",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1555645",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "2000×2666mm",
+    "xhsTitle": "天然奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1555647",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "1706×1280mm",
+    "xhsTitle": "别墅同款天然奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1386355",
+    "l1": "furniture",
+    "cat": "Picasso",
+    "title": "毕加索150+90",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1461953",
+    "l1": "furniture",
+    "cat": "Picasso",
+    "title": "毕加索800X1400",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1398022",
+    "l1": "slab",
+    "cat": "Picasso",
+    "title": "毕加索FL1080",
+    "titleEn": "Picasso",
+    "size": "2181×1636mm",
+    "xhsTitle": "别墅同款奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1457188",
+    "l1": "furniture",
+    "cat": "Picasso",
+    "title": "Y150B147+88B148 毕加索1500+880",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1591489",
+    "l1": "slab",
+    "cat": "Picasso",
+    "title": "毕加索FLS1080",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！奢石大板实景分享",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1405533",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "潘多拉1800X900",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的天然奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1407685",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "威尼斯棕1800X900",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1405531",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "四季绿1800X900",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的天然奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403920",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "雪山兰1800X900",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "xhsTitle": "天然奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1406896",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "潘多拉1800X900",
+    "titleEn": "Pandora",
+    "size": "3024×4032mm",
+    "xhsTitle": "被邻居追着问的天然奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1394276",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸FL001614",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！奢石背景墙实景",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg"
+    ]
+  },
+  {
+    "id": "1540408",
+    "l1": "furniture",
+    "cat": "Golden Silk",
+    "title": "Y135Y895+Y80Y896 黄金丝绸135+80",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg",
+      "4.jpg"
+    ]
+  },
+  {
+    "id": "1427566",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "xhsTitle": "被问疯了！奢石背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1553552",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "xhsTitle": "别墅同款奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1523980",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸00164",
+    "titleEn": "Golden Silk",
+    "size": "2100×1576mm",
+    "xhsTitle": "奢石奢石｜客厅电视背景墙高级感天花板",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1403946",
+    "l1": "furniture",
+    "cat": "Emerald",
+    "title": "祖母绿2000X1000",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "被邻居追着问的奢石！",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1403949",
+    "l1": "furniture",
+    "cat": "Emerald",
+    "title": "祖母绿2000X1000",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1687358",
+    "l1": "slab",
+    "cat": "Emerald",
+    "title": "祖母绿",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石烧结石｜一板到顶无缝拼接",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1794795",
+    "l1": "furniture",
+    "cat": "Emerald",
+    "title": "祖母绿100X100",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石｜提升客厅格调的秘密",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1524062",
+    "l1": "slab",
+    "cat": "Emerald",
+    "title": "��母绿25722",
+    "titleEn": "Emerald",
+    "size": "2100×1576mm",
+    "xhsTitle": "别墅同款奢石｜一面墙封神",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1400642",
+    "l1": "furniture",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝150+90",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石推荐｜客厅颜值担当",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1427464",
+    "l1": "slab",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝12022",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "xhsTitle": "颜值暴击！奢石大板实景分享",
+    "imgs": [
+      "cover.jpg"
+    ]
+  },
+  {
+    "id": "1401048",
+    "l1": "furniture",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝135+80",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "xhsTitle": "一眼爱上的奢石，轻奢必备",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1578099",
+    "l1": "furniture",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝1000X2000",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "xhsTitle": "奢石实拍｜高级感拿捏了",
+    "imgs": [
+      "cover.jpg",
+      "2.jpg",
+      "3.jpg"
+    ]
+  },
+  {
+    "id": "1555336",
+    "l1": "slab",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝",
+    "titleEn": "Dream Blue",
+    "size": "1702×1276mm",
+    "xhsTitle": "被问疯了！奢石背景墙实景",
+    "imgs": [
+      "cover.jpg"
+    ]
+  }
+];
+const l1Names = { slab:'奢石大板', furniture:'成品家具', accessory:'配件脚架', case:'落地案例' };
+
+const cats = [...new Set(PRODUCTS.map(p=>p.cat))].sort();
+const catSel = document.getElementById('filterCat');
+cats.forEach(c=>{const o=document.createElement('option');o.value=c;o.textContent=c;catSel.appendChild(o);});
+
+const grid=document.getElementById('grid');
+PRODUCTS.forEach(p=>{
+  const imgs=p.imgs;
+  const tag=`<span class="tag tag-${p.l1}">${l1Names[p.l1]||p.l1}</span>`;
+  const card=document.createElement('div');
+  card.className='card';
+  card.dataset.l1=p.l1;
+  card.dataset.cat=p.cat;
+  card.dataset.search=(p.title+' '+p.titleEn+' '+p.id+' '+p.xhsTitle).toLowerCase();
+  card.onclick=()=>showProduct(p);
+  card.innerHTML=`
+    <div class="cover-wrap">
+      <img src="${p.id}/cover.jpg" alt="${p.title}" loading="lazy">
+      <div class="img-count">${imgs.length}张</div>
+    </div>
+    <div class="card-info">
+      <div class="card-title">${p.xhsTitle}</div>
+      <div class="card-meta">${tag} ${p.cat} · ${p.size.replace(/×/g,'x')}</div>
+    </div>`;
+  grid.appendChild(card);
+});
+
+function applyFilter(){
+  const l1=document.getElementById('filterL1').value;
+  const cat=document.getElementById('filterCat').value;
+  const q=document.getElementById('searchBox').value.toLowerCase();
+  let shown=0;
+  document.querySelectorAll('.card').forEach(c=>{
+    const okL1=!l1||c.dataset.l1===l1;
+    const okCat=!cat||c.dataset.cat===cat;
+    const okQ=!q||c.dataset.search.includes(q);
+    if(okL1&&okCat&&okQ){c.classList.remove('hidden');shown++;}
+    else c.classList.add('hidden');
+  });
+  document.getElementById('stats').textContent=`${shown} / ${PRODUCTS.length}`;
+}
+applyFilter();
+
+function showProduct(p){
+  const mc=document.getElementById('modalContent');
+  mc.innerHTML=p.imgs.map(i=>`<img src="${p.id}/${i}" alt="">`).join('');
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+</script>
+</body>
+</html>

@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>阿里巴巴素材库 - 200款产品总览</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:"Microsoft YaHei",Arial,sans-serif; background:#e8e4dd; color:#1a1a1a; padding:20px; }
+  h1 { text-align:center; color:#1a1a1a; font-weight:300; letter-spacing:2px; margin-bottom:6px; }
+  .sub { text-align:center; color:#888; font-size:13px; margin-bottom:24px; }
+  .toolbar { position:sticky; top:0; background:rgba(26,26,26,0.95); backdrop-filter:blur(8px); padding:12px 20px; border-radius:8px; margin-bottom:20px; display:flex; gap:8px; flex-wrap:wrap; justify-content:center; align-items:center; z-index:100; }
+  .toolbar label { color:#999; font-size:12px; }
+  select, input { padding:6px 10px; border:1px solid #444; background:#2a2a2a; color:#d4b876; border-radius:4px; font-size:13px; }
+  .stats { color:#d4b876; font-size:13px; margin-left:auto; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:18px; max-width:1600px; margin:0 auto; }
+  .card { background:#fff; border-radius:8px; overflow:hidden; box-shadow:0 2px 12px rgba(0,0,0,0.08); }
+  .card.hidden { display:none; }
+  .card-head { padding:12px 14px; background:#1a1a1a; color:#d4b876; }
+  .card-id { font-size:11px; opacity:0.7; }
+  .card-title { font-size:14px; font-weight:600; margin-top:2px; }
+  .card-cat { font-size:11px; color:#888; margin-top:2px; }
+  .card-imgs { display:flex; flex-wrap:wrap; gap:4px; padding:10px; background:#faf8f5; }
+  .card-imgs img { width:90px; height:90px; object-fit:cover; border-radius:4px; cursor:pointer; border:1px solid #eee; }
+  .card-imgs img:hover { border-color:#b8965a; transform:scale(1.05); }
+  .card-actions { padding:10px 14px; display:flex; gap:8px; border-top:1px solid #f0f0f0; }
+  .btn { padding:6px 12px; font-size:12px; border:1px solid #b8965a; color:#b8965a; background:transparent; border-radius:4px; cursor:pointer; text-decoration:none; }
+  .btn:hover { background:#b8965a; color:#fff; }
+  .tag { display:inline-block; padding:2px 8px; border-radius:10px; font-size:10px; margin-right:4px; }
+  .tag-slab { background:#e8f0e8; color:#2d5a2d; }
+  .tag-furniture { background:#f0e8e0; color:#8b4513; }
+  .tag-accessory { background:#e8e8f0; color:#4a4a8b; }
+  .tag-case { background:#f0f0e8; color:#6b6b3a; }
+  /* 详情页弹窗 */
+  .modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:1000; padding:20px; overflow:auto; }
+  .modal:target { display:block; }
+  .modal img { max-width:750px; width:100%; margin:0 auto; display:block; box-shadow:0 0 40px rgba(0,0,0,0.5); }
+  .modal-close { position:fixed; top:20px; right:30px; color:#fff; font-size:30px; text-decoration:none; background:rgba(0,0,0,0.5); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+</style>
+</head>
+<body>
+
+<h1>Wharton Ceramics · 阿里巴巴素材库</h1>
+<p class="sub">200 款产品 · 407 张主图 · 200 张详情页 · 自动生成于 2026-07-03</p>
+
+<div class="toolbar">
+  <label>板块:</label>
+  <select id="filterL1" onchange="applyFilter()">
+    <option value="">全部</option>
+    <option value="slab">奢石大板</option>
+    <option value="furniture">成品家具</option>
+    <option value="accessory">配件脚架</option>
+    <option value="case">落地案例</option>
+  </select>
+  <label>品类:</label>
+  <select id="filterCat" onchange="applyFilter()">
+    <option value="">全部</option>
+  </select>
+  <label>搜索:</label>
+  <input type="text" id="searchBox" placeholder="产品名/ID..." oninput="applyFilter()" style="width:140px;">
+  <span class="stats" id="stats"></span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<script>
+// 产品数据由生成器注入
+const PRODUCTS = [
+  {
+    "id": "1394292",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉YSL3162",
+    "titleEn": "Pandora",
+    "size": "1636×2181mm",
+    "imgs": [
+      "1394292_0_800.jpg",
+      "1394292_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1455101",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL3128",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1455101_0_800.jpg",
+      "1455101_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1405177",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL124",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405177_0_800.jpg",
+      "1405177_1_800.jpg",
+      "1405177_2_800.jpg",
+      "1405177_3_800.jpg",
+      "1405177_4_800.jpg"
+    ]
+  },
+  {
+    "id": "1434540",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL124",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1434540_0_800.jpg",
+      "1434540_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1568940",
+    "l1": "slab",
+    "cat": "Pandora",
+    "title": "潘多拉FL250703",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1568940_0_800.jpg",
+      "1568940_1_800.jpg",
+      "1568940_2_800.jpg",
+      "1568940_3_800.jpg"
+    ]
+  },
+  {
+    "id": "1391430",
+    "l1": "slab",
+    "cat": "Blue Emerald",
+    "title": "FL627 蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1391430_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1405236",
+    "l1": "furniture",
+    "cat": "Blue Emerald",
+    "title": "蓝翡翠1600X900",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405236_0_800.jpg",
+      "1405236_1_800.jpg",
+      "1405236_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1407109",
+    "l1": "furniture",
+    "cat": "Blue Emerald",
+    "title": "蓝翡翠1400X800",
+    "titleEn": "Blue Emerald",
+    "size": "2316×3088mm",
+    "imgs": [
+      "1407109_0_800.jpg",
+      "1407109_1_800.jpg",
+      "1407109_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1460968",
+    "l1": "slab",
+    "cat": "Blue Emerald",
+    "title": "FL09蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1460968_0_800.jpg",
+      "1460968_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1434280",
+    "l1": "slab",
+    "cat": "Blue Emerald",
+    "title": "FL02蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1434280_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1391465",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰6081",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1391465_0_800.jpg",
+      "1391465_1_800.jpg",
+      "1391465_2_800.jpg",
+      "1391465_3_800.jpg",
+      "1391465_4_800.jpg"
+    ]
+  },
+  {
+    "id": "1434728",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰6081",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1434728_0_800.jpg",
+      "1434728_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1396589",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰FL6081",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1396589_0_800.jpg",
+      "1396589_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1394259",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰 4049",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1394259_0_800.jpg",
+      "1394259_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1394262",
+    "l1": "slab",
+    "cat": "Snow Mountain Orchid",
+    "title": "雪山兰 552",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1394262_0_800.jpg",
+      "1394262_1_800.jpg",
+      "1394262_2_800.jpg",
+      "1394262_3_800.jpg",
+      "1394262_4_800.jpg"
+    ]
+  },
+  {
+    "id": "1531054",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "B42客椅",
+    "titleEn": "Dining Chair",
+    "size": "453×472mm",
+    "imgs": [
+      "1531054_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1531058",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "B48客椅",
+    "titleEn": "Dining Chair",
+    "size": "1063×1171mm",
+    "imgs": [
+      "1531058_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1532942",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "C709",
+    "titleEn": "Dining Chair",
+    "size": "1336×1279mm",
+    "imgs": [
+      "1532942_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1531057",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "B49客椅",
+    "titleEn": "Dining Chair",
+    "size": "543×446mm",
+    "imgs": [
+      "1531057_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1532924",
+    "l1": "accessory",
+    "cat": "Dining Chair",
+    "title": "茶椅",
+    "titleEn": "Dining Chair",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1532924_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1530002",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "YCA6050",
+    "titleEn": "Tea Table",
+    "size": "606×362mm",
+    "imgs": [
+      "1530002_0_800.jpg",
+      "1530002_1_800.jpg",
+      "1530002_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1530001",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "YCA6089",
+    "titleEn": "Tea Table",
+    "size": "1073×889mm",
+    "imgs": [
+      "1530001_0_800.jpg",
+      "1530001_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1531037",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "FS-CJ02茶几",
+    "titleEn": "Tea Table",
+    "size": "1284×1262mm",
+    "imgs": [
+      "1531037_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1617162",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "盒子茶几底座",
+    "titleEn": "Tea Table",
+    "size": "1702×1276mm",
+    "imgs": [
+      "1617162_0_800.jpg",
+      "1617162_1_800.jpg",
+      "1617162_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1531030",
+    "l1": "accessory",
+    "cat": "Tea Table",
+    "title": "FS-CJ11 茶几",
+    "titleEn": "Tea Table",
+    "size": "497×349mm",
+    "imgs": [
+      "1531030_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1537784",
+    "l1": "furniture",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉800X1600",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1537784_0_800.jpg",
+      "1537784_1_800.jpg",
+      "1537784_2_800.jpg",
+      "1537784_3_800.jpg"
+    ]
+  },
+  {
+    "id": "1568952",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉1328",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1568952_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1461452",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉HW-133",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1461452_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1525712",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉HW1328",
+    "titleEn": "Royal White Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1525712_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1467005",
+    "l1": "slab",
+    "cat": "Royal White Jade",
+    "title": "皇家白玉HW1240",
+    "titleEn": "Royal White Jade",
+    "size": "1706×1279mm",
+    "imgs": [
+      "1467005_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1407734",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "宝格丽紫2200X1050",
+    "titleEn": "Dining Table",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1407734_0_800.jpg",
+      "1407734_1_800.jpg",
+      "1407734_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1405237",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "潘多拉980*2000",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405237_0_800.jpg",
+      "1405237_1_800.jpg",
+      "1405237_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1405301",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "百达翡翠1800X900",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405301_0_800.jpg",
+      "1405301_1_800.jpg",
+      "1405301_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1405238",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "金枝玉叶2000X1000",
+    "titleEn": "Golden Branch Jade Leaf",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405238_0_800.jpg",
+      "1405238_1_800.jpg",
+      "1405238_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1405242",
+    "l1": "furniture",
+    "cat": "Dining Table",
+    "title": "SK27Y10200046 潘多拉2000X1000",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405242_0_800.jpg",
+      "1405242_1_800.jpg",
+      "1405242_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1441821",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1526×1040mm",
+    "imgs": [
+      "1441821_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1441807",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1616×1170mm",
+    "imgs": [
+      "1441807_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1441815",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1080×847mm",
+    "imgs": [
+      "1441815_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1441816",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1080×883mm",
+    "imgs": [
+      "1441816_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1441810",
+    "l1": "case",
+    "cat": "Feature Wall",
+    "title": "透光背景",
+    "titleEn": "Feature Wall",
+    "size": "1080×905mm",
+    "imgs": [
+      "1441810_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1431742",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠 660*1000",
+    "titleEn": "Blue Emerald",
+    "size": "1280×1707mm",
+    "imgs": [
+      "1431742_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1432059",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "潘多拉600*1200",
+    "titleEn": "Pandora",
+    "size": "1280×1707mm",
+    "imgs": [
+      "1432059_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1463321",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "新芬迪白6001200",
+    "titleEn": "Fendi White",
+    "size": "421×593mm",
+    "imgs": [
+      "1463321_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1463211",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "云母绿茶几600X1200",
+    "titleEn": "Mica Green",
+    "size": "432×577mm",
+    "imgs": [
+      "1463211_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1466391",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "宝格丽黑1400X800",
+    "titleEn": "Bulgari Black",
+    "size": "432×577mm",
+    "imgs": [
+      "1466391_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1568950",
+    "l1": "slab",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠HR297",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1568950_0_800.jpg",
+      "1568950_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1591491",
+    "l1": "slab",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠684",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1591491_0_800.jpg",
+      "1591491_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1387919",
+    "l1": "furniture",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠航母茶台900*4500",
+    "titleEn": "Patek Emerald",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1387919_0_800.jpg",
+      "1387919_1_800.jpg",
+      "1387919_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1405535",
+    "l1": "furniture",
+    "cat": "Patek Emerald",
+    "title": "百达翡翠1800X900",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405535_0_800.jpg",
+      "1405535_1_800.jpg",
+      "1405535_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1673611",
+    "l1": "furniture",
+    "cat": "Patek Emerald",
+    "title": "Y150B130+Y90B131 百达翡翠150+90",
+    "titleEn": "Patek Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1673611_0_800.jpg",
+      "1673611_1_800.jpg",
+      "1673611_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1431745",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "蓝翡翠  400*1500",
+    "titleEn": "Blue Emerald",
+    "size": "1280×1280mm",
+    "imgs": [
+      "1431745_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1432050",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "潘多拉 400*1400",
+    "titleEn": "Pandora",
+    "size": "1280×1707mm",
+    "imgs": [
+      "1432050_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1431746",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "蓝翡翠 400*1500",
+    "titleEn": "Blue Emerald",
+    "size": "1280×1280mm",
+    "imgs": [
+      "1431746_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1439079",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "潘多拉   400*1400",
+    "titleEn": "Pandora",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1439079_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1793691",
+    "l1": "furniture",
+    "cat": "Console",
+    "title": "新芬迪白2600*400",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1793691_0_800.jpg",
+      "1793691_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1819628",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "蓝翡翠茶车400X900",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1819628_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1797801",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "潘多拉400X900",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1797801_0_800.jpg",
+      "1797801_1_800.jpg",
+      "1797801_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1462834",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "牛油果绿400X900",
+    "titleEn": "Avocado Green",
+    "size": "375×666mm",
+    "imgs": [
+      "1462834_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1491687",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "香格里拉茶车",
+    "titleEn": "Shangri-La",
+    "size": "432×577mm",
+    "imgs": [
+      "1491687_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1466424",
+    "l1": "furniture",
+    "cat": "Tea Cart",
+    "title": "宝格丽紫40X90",
+    "titleEn": "Tea Cart",
+    "size": "433×577mm",
+    "imgs": [
+      "1466424_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1423815",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻FL- 1212",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1423815_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1423817",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻FL- 1145",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1423817_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1405311",
+    "l1": "furniture",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻2000X1000",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405311_0_800.jpg",
+      "1405311_1_800.jpg",
+      "1405311_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1423369",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻1212",
+    "titleEn": "Platinum Diamond",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1423369_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1423816",
+    "l1": "slab",
+    "cat": "Platinum Diamond",
+    "title": "铂金钻黄底",
+    "titleEn": "Platinum Diamond",
+    "size": "1702×1276mm",
+    "imgs": [
+      "1423816_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1423371",
+    "l1": "slab",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑",
+    "titleEn": "Bulgari Black",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1423371_0_800.jpg",
+      "1423371_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1423370",
+    "l1": "slab",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑230906",
+    "titleEn": "Bulgari Black",
+    "size": "1920×1080mm",
+    "imgs": [
+      "1423370_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1403722",
+    "l1": "furniture",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑800X1400",
+    "titleEn": "Bulgari Black",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403722_0_800.jpg",
+      "1403722_1_800.jpg",
+      "1403722_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1407110",
+    "l1": "furniture",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑1800X900",
+    "titleEn": "Bulgari Black",
+    "size": "3024×4032mm",
+    "imgs": [
+      "1407110_0_800.jpg",
+      "1407110_1_800.jpg",
+      "1407110_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1803510",
+    "l1": "furniture",
+    "cat": "Bulgari Black",
+    "title": "宝格丽黑180+118",
+    "titleEn": "Bulgari Black",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1803510_0_800.jpg",
+      "1803510_1_800.jpg",
+      "1803510_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403706",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕900X1600",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403706_0_800.jpg",
+      "1403706_1_800.jpg",
+      "1403706_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1394289",
+    "l1": "slab",
+    "cat": "Venice Brown",
+    "title": "威尼斯灰",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1394289_0_800.jpg",
+      "1394289_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1403970",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕1600X900",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403970_0_800.jpg",
+      "1403970_1_800.jpg",
+      "1403970_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1778436",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕900X1800",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1778436_0_800.jpg",
+      "1778436_1_800.jpg",
+      "1778436_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1405614",
+    "l1": "furniture",
+    "cat": "Venice Brown",
+    "title": "威尼斯棕1600X900",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405614_0_800.jpg",
+      "1405614_1_800.jpg",
+      "1405614_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1591017",
+    "l1": "slab",
+    "cat": "Fendi White",
+    "title": "芬迪白FFF-PYD705",
+    "titleEn": "Fendi White",
+    "size": "1789×1280mm",
+    "imgs": [
+      "1591017_0_800.jpg",
+      "1591017_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1405141",
+    "l1": "furniture",
+    "cat": "Fendi White",
+    "title": "芬迪白1800X900",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405141_0_800.jpg",
+      "1405141_1_800.jpg",
+      "1405141_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1436291",
+    "l1": "slab",
+    "cat": "Fendi White",
+    "title": "芬迪白FL1080",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1436291_0_800.jpg",
+      "1436291_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1591426",
+    "l1": "furniture",
+    "cat": "Fendi White",
+    "title": "100200F033芬迪白1000X2000",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1591426_0_800.jpg",
+      "1591426_1_800.jpg",
+      "1591426_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1481470",
+    "l1": "slab",
+    "cat": "Fendi White",
+    "title": "新芬迪白HU01335",
+    "titleEn": "Fendi White",
+    "size": "2100×1576mm",
+    "imgs": [
+      "1481470_0_800.jpg",
+      "1481470_0.png_800.jpg"
+    ]
+  },
+  {
+    "id": "1394278",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿FL0607",
+    "titleEn": "Amazon Green",
+    "size": "1636×2181mm",
+    "imgs": [
+      "1394278_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1394282",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿FL0001",
+    "titleEn": "Amazon Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1394282_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1427071",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿FLKMR",
+    "titleEn": "Amazon Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1427071_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1397964",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿NXYMXL24020",
+    "titleEn": "Amazon Green",
+    "size": "2181×1636mm",
+    "imgs": [
+      "1397964_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1427072",
+    "l1": "slab",
+    "cat": "Amazon Green",
+    "title": "亚马逊绿24025",
+    "titleEn": "Amazon Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1427072_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1480572",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1480572_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1478487",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "芬迪白",
+    "titleEn": "Fendi White",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1478487_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1480571",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1480571_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1432058",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "潘多拉 600*1200",
+    "titleEn": "Pandora",
+    "size": "4032×3024mm",
+    "imgs": [
+      "1432058_0_800.jpg",
+      "1432058_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1478475",
+    "l1": "furniture",
+    "cat": "Tea Table",
+    "title": "蓝翡翠700X1400",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1478475_0_800.jpg",
+      "1478475_1_800.jpg",
+      "1478475_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403971",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶1600X900",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403971_0_800.jpg",
+      "1403971_1_800.jpg",
+      "1403971_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1391281",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶180x90",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1391281_0_800.jpg",
+      "1391281_1_800.jpg",
+      "1391281_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1632761",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "红153/175 蓝水晶150+90",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1632761_0_800.jpg",
+      "1632761_1_800.jpg",
+      "1632761_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403882",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶2200X1000",
+    "titleEn": "Blue Crystal",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403882_0_800.jpg",
+      "1403882_1_800.jpg",
+      "1403882_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1408499",
+    "l1": "furniture",
+    "cat": "Blue Crystal",
+    "title": "蓝水晶1600X900",
+    "titleEn": "Blue Crystal",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1408499_0_800.jpg",
+      "1408499_1_800.jpg",
+      "1408499_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1427495",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "大花白2349",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1427495_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1523981",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "大花白9266",
+    "titleEn": "White Flower",
+    "size": "2100×1576mm",
+    "imgs": [
+      "1523981_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1925430",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "2336-9261大花白 3X1.56/2.97X1.54",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1925430_0_800.jpg",
+      "1925430_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1960981",
+    "l1": "slab",
+    "cat": "White Flower",
+    "title": "150705 大花白2.76*1.7",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1960981_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1819624",
+    "l1": "furniture",
+    "cat": "White Flower",
+    "title": "大花白75+130",
+    "titleEn": "White Flower",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1819624_0_800.jpg",
+      "1819624_1_800.jpg",
+      "1819624_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1530635",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "FS-XG01 月亮玄关",
+    "titleEn": "Console",
+    "size": "315×248mm",
+    "imgs": [
+      "1530635_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1529998",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "LV玄关",
+    "titleEn": "Console",
+    "size": "845×531mm",
+    "imgs": [
+      "1529998_0_800.jpg",
+      "1529998_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1533665",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "玄关底座",
+    "titleEn": "Console",
+    "size": "248×261mm",
+    "imgs": [
+      "1533665_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1532949",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "YCZ9119 玄关",
+    "titleEn": "Console",
+    "size": "1080×1440mm",
+    "imgs": [
+      "1532949_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1530000",
+    "l1": "accessory",
+    "cat": "Console",
+    "title": "YCZ9117 玄关",
+    "titleEn": "Console",
+    "size": "1076×1064mm",
+    "imgs": [
+      "1530000_0_800.jpg",
+      "1530000_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1537608",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "水滴型餐桌 (2)",
+    "titleEn": "Dining Table",
+    "size": "1080×1920mm",
+    "imgs": [
+      "1537608_0_800.jpg",
+      "1537608_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1425685",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (29)",
+    "titleEn": "Dining Table",
+    "size": "1284×1669mm",
+    "imgs": [
+      "1425685_0_800.jpg",
+      "1425685_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1425686",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (26)",
+    "titleEn": "Dining Table",
+    "size": "1284×1678mm",
+    "imgs": [
+      "1425686_0_800.jpg",
+      "1425686_1_800.jpg",
+      "1425686_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1425687",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (23)",
+    "titleEn": "Dining Table",
+    "size": "1284×1630mm",
+    "imgs": [
+      "1425687_0_800.jpg",
+      "1425687_1_800.jpg",
+      "1425687_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1425684",
+    "l1": "case",
+    "cat": "Dining Table",
+    "title": "异形餐桌案例 (31)",
+    "titleEn": "Dining Table",
+    "size": "1284×1681mm",
+    "imgs": [
+      "1425684_0_800.jpg",
+      "1425684_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1525625",
+    "l1": "slab",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金241",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1525625_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1669633",
+    "l1": "furniture",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金150+90",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1669633_0_800.jpg",
+      "1669633_1_800.jpg",
+      "1669633_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1568945",
+    "l1": "slab",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金241",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1568945_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1568946",
+    "l1": "slab",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金241",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1568946_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1705208",
+    "l1": "furniture",
+    "cat": "Cosmic Gold",
+    "title": "宇宙金150+87",
+    "titleEn": "Cosmic Gold",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1705208_0_800.jpg",
+      "1705208_1_800.jpg",
+      "1705208_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1593654",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y135F040+Y80F041 芬迪绿135+80",
+    "titleEn": "Fendi Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1593654_0_800.jpg",
+      "1593654_1_800.jpg",
+      "1593654_2_800.jpg"
+    ]
+  },
+  {
+    "id": "2027869",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "90180Y779 云母绿180*90",
+    "titleEn": "Mica Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "2027869_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1720336",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y135Y259+Y80Y260 云母绿135+80",
+    "titleEn": "Mica Green",
+    "size": "577×432mm",
+    "imgs": [
+      "1720336_0_800.jpg",
+      "1720336_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1901655",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y135Y559+Y80Y560 云母绿135+80",
+    "titleEn": "Mica Green",
+    "size": "2000×2000mm",
+    "imgs": [
+      "1901655_0_800.jpg",
+      "1901655_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1833321",
+    "l1": "furniture",
+    "cat": "Fendi Green",
+    "title": "Y150Y475+Y90Y476 云母绿150+90",
+    "titleEn": "Mica Green",
+    "size": "2000×2000mm",
+    "imgs": [
+      "1833321_0_800.jpg",
+      "1833321_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1425491",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (5)",
+    "titleEn": "Luxury Stone",
+    "size": "1284×1671mm",
+    "imgs": [
+      "1425491_0_800.jpg",
+      "1425491_1_800.jpg",
+      "1425491_2_800.jpg",
+      "1425491_3_800.jpg"
+    ]
+  },
+  {
+    "id": "1425484",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (26)",
+    "titleEn": "Luxury Stone",
+    "size": "1284×1667mm",
+    "imgs": [
+      "1425484_0_800.jpg",
+      "1425484_1_800.jpg",
+      "1425484_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1425485",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (23)",
+    "titleEn": "Luxury Stone",
+    "size": "1283×1676mm",
+    "imgs": [
+      "1425485_0_800.jpg",
+      "1425485_1_800.jpg",
+      "1425485_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1425487",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (19)",
+    "titleEn": "Luxury Stone",
+    "size": "1283×1659mm",
+    "imgs": [
+      "1425487_0_800.jpg",
+      "1425487_1_800.jpg",
+      "1425487_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1425488",
+    "l1": "case",
+    "cat": "天然奢石",
+    "title": "岛台案例 (16)",
+    "titleEn": "Luxury Stone",
+    "size": "1284×1647mm",
+    "imgs": [
+      "1425488_0_800.jpg",
+      "1425488_1_800.jpg",
+      "1425488_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1925317",
+    "l1": "slab",
+    "cat": "Prada Green",
+    "title": "20260412#04 普拉达绿3X1.72",
+    "titleEn": "Prada Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1925317_0_800.jpg",
+      "1925317_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1391331",
+    "l1": "furniture",
+    "cat": "Prada Green",
+    "title": "普拉达绿1240*2200",
+    "titleEn": "Prada Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1391331_0_800.jpg",
+      "1391331_1_800.jpg",
+      "1391331_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1458908",
+    "l1": "furniture",
+    "cat": "Prada Green",
+    "title": "普拉达绿700X1300",
+    "titleEn": "Prada Green",
+    "size": "432×577mm",
+    "imgs": [
+      "1458908_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1999809",
+    "l1": "slab",
+    "cat": "Prada Green",
+    "title": "JY1128普拉达绿",
+    "titleEn": "Prada Green",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1999809_0_800.jpg",
+      "1999809_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1458906",
+    "l1": "furniture",
+    "cat": "Prada Green",
+    "title": "普拉达绿140+80",
+    "titleEn": "Prada Green",
+    "size": "577×432mm",
+    "imgs": [
+      "1458906_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1405618",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "宝格丽紫2000X1000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405618_0_800.jpg",
+      "1405618_1_800.jpg",
+      "1405618_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1574132",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "卡里冰玉1000*2000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1574132_0_800.jpg",
+      "1574132_1_800.jpg",
+      "1574132_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1391226",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "潘多拉1000*2000",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1391226_0_800.jpg",
+      "1391226_1_800.jpg",
+      "1391226_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1457983",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "宝格丽紫1000*2000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1457983_0_800.jpg",
+      "1457983_1_800.jpg",
+      "1457983_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403948",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "猫眼绿2000X1000",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403948_0_800.jpg",
+      "1403948_1_800.jpg",
+      "1403948_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1423797",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "卡里冰玉",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1423797_0_800.jpg",
+      "1423797_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1553872",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "卡里冰玉2.385X0.65X1.235X1.155",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1553872_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1777414",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "卡里冰玉900X1800",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1777414_0_800.jpg",
+      "1777414_1_800.jpg",
+      "1777414_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1892656",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "SKF8016K04 卡里冰玉160X80",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1892656_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1553878",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "卡里冰玉2.325X0.6X1.4X0.9",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1553878_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1701178",
+    "l1": "slab",
+    "cat": "Blue Sky Jade",
+    "title": "蓝天玉FL01",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1701178_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1927787",
+    "l1": "furniture",
+    "cat": "Blue Sky Jade",
+    "title": "Y194L590+Y125L591 蓝天玉194+125",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1927787_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1982798",
+    "l1": "furniture",
+    "cat": "Blue Sky Jade",
+    "title": "Y135L679+Y80L680 蓝天玉135+80",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×2000mm",
+    "imgs": [
+      "1982798_0_800.jpg",
+      "1982798_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1925375",
+    "l1": "slab",
+    "cat": "Blue Sky Jade",
+    "title": "FL-01蓝天白云（蓝天玉）3.28X1.95/3.26X1.97",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1925375_0_800.jpg"
+    ]
+  },
+  {
+    "id": "2005274",
+    "l1": "furniture",
+    "cat": "Blue Sky Jade",
+    "title": "Y150L729+Y90L730 蓝天玉150+90",
+    "titleEn": "Blue Sky Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "2005274_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1405608",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐1800X860",
+    "titleEn": "Snow Fox",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405608_0_800.jpg",
+      "1405608_1_800.jpg",
+      "1405608_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1555681",
+    "l1": "slab",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐",
+    "titleEn": "Snow Fox",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1555681_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1924519",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "Y135X421+Y80X422 雪山飞狐135+80",
+    "titleEn": "Snow Fox",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1924519_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1574130",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐1000*2000",
+    "titleEn": "Snow Fox",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1574130_0_800.jpg",
+      "1574130_1_800.jpg",
+      "1574130_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1458581",
+    "l1": "furniture",
+    "cat": "Snow Fox",
+    "title": "雪山飞狐1000+2000",
+    "titleEn": "Snow Fox",
+    "size": "432×577mm",
+    "imgs": [
+      "1458581_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1385688",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠150+90转盘",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1385688_0_800.jpg",
+      "1385688_1_800.jpg",
+      "1385688_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1385453",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠150+80",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1385453_0_800.jpg",
+      "1385453_1_800.jpg",
+      "1385453_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1594565",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠150+80",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1594565_0_800.jpg",
+      "1594565_1_800.jpg",
+      "1594565_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403580",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "蓝翡翠160+90",
+    "titleEn": "Blue Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403580_0_800.jpg",
+      "1403580_1_800.jpg",
+      "1403580_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403493",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "古木纹150+90",
+    "titleEn": "Wood Grain",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403493_0_800.jpg",
+      "1403493_1_800.jpg",
+      "1403493_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1461445",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀FLXS250601",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1461445_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1525627",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀FLXS250601",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1525627_0_800.jpg",
+      "1525627_1_800.jpg",
+      "1525627_2_800.jpg",
+      "1525627_3_800.jpg"
+    ]
+  },
+  {
+    "id": "1701163",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀FL139",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1701163_0_800.jpg",
+      "1701163_1_800.jpg",
+      "1701163_2_800.jpg",
+      "1701163_3_800.jpg"
+    ]
+  },
+  {
+    "id": "1793452",
+    "l1": "furniture",
+    "cat": "Golden Peacock",
+    "title": "金孔雀900*1600",
+    "titleEn": "Golden Peacock",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1793452_0_800.jpg",
+      "1793452_1_800.jpg",
+      "1793452_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1553575",
+    "l1": "slab",
+    "cat": "Golden Peacock",
+    "title": "金孔雀",
+    "titleEn": "Golden Peacock",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1553575_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1394320",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "宝格丽紫HY23",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1394320_0_800.jpg",
+      "1394320_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1568951",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "宝格丽紫HY45",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1568951_0_800.jpg",
+      "1568951_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1481472",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "宝格丽紫",
+    "titleEn": "Luxury Stone",
+    "size": "2100×1576mm",
+    "imgs": [
+      "1481472_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1794732",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "宝保丽紫1195X1195",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1794732_0_800.jpg",
+      "1794732_1_800.jpg",
+      "1794732_2_800.jpg"
+    ]
+  },
+  {
+    "id": "2104060",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "HY45宝格丽紫 3050*1930",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "2104060_0_800.jpg",
+      "2104060_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1807324",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "Y135B389+Y80B390 白冰玉135+80",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1807324_0_800.jpg",
+      "1807324_1_800.jpg",
+      "1807324_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1889366",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "Y150B393+Y90B394 白冰玉150+90",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1889366_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1985333",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "100200B695 白冰玉200X100",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1985333_0_800.jpg"
+    ]
+  },
+  {
+    "id": "2078147",
+    "l1": "slab",
+    "cat": "White Ice Jade",
+    "title": "白冰玉1.65X0.74",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "2078147_0_800.jpg"
+    ]
+  },
+  {
+    "id": "2080548",
+    "l1": "furniture",
+    "cat": "White Ice Jade",
+    "title": "白冰玉150+90",
+    "titleEn": "White Ice Jade",
+    "size": "2000×1500mm",
+    "imgs": [
+      "2080548_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1396598",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅YT0321",
+    "titleEn": "Luxury Stone",
+    "size": "1636×2181mm",
+    "imgs": [
+      "1396598_0_800.jpg",
+      "1396598_1_800.jpg",
+      "1396598_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1555644",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1555644_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1644319",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "4096×3500mm",
+    "imgs": [
+      "1644319_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1555645",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "2000×2666mm",
+    "imgs": [
+      "1555645_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1555647",
+    "l1": "slab",
+    "cat": "天然奢石",
+    "title": "香雪梅",
+    "titleEn": "Luxury Stone",
+    "size": "1706×1280mm",
+    "imgs": [
+      "1555647_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1386355",
+    "l1": "furniture",
+    "cat": "Picasso",
+    "title": "毕加索150+90",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1386355_0_800.jpg",
+      "1386355_1_800.jpg",
+      "1386355_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1461953",
+    "l1": "furniture",
+    "cat": "Picasso",
+    "title": "毕加索800X1400",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1461953_0_800.jpg",
+      "1461953_1_800.jpg",
+      "1461953_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1398022",
+    "l1": "slab",
+    "cat": "Picasso",
+    "title": "毕加索FL1080",
+    "titleEn": "Picasso",
+    "size": "2181×1636mm",
+    "imgs": [
+      "1398022_0_800.jpg",
+      "1398022_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1457188",
+    "l1": "furniture",
+    "cat": "Picasso",
+    "title": "Y150B147+88B148 毕加索1500+880",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1457188_0_800.jpg",
+      "1457188_1_800.jpg",
+      "1457188_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1591489",
+    "l1": "slab",
+    "cat": "Picasso",
+    "title": "毕加索FLS1080",
+    "titleEn": "Picasso",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1591489_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1405533",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "潘多拉1800X900",
+    "titleEn": "Pandora",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405533_0_800.jpg",
+      "1405533_1_800.jpg",
+      "1405533_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1407685",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "威尼斯棕1800X900",
+    "titleEn": "Venice Brown",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1407685_0_800.jpg",
+      "1407685_1_800.jpg",
+      "1407685_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1405531",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "四季绿1800X900",
+    "titleEn": "Luxury Stone",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1405531_0_800.jpg",
+      "1405531_1_800.jpg",
+      "1405531_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403920",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "雪山兰1800X900",
+    "titleEn": "Snow Mountain Orchid",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403920_0_800.jpg",
+      "1403920_1_800.jpg",
+      "1403920_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1406896",
+    "l1": "furniture",
+    "cat": "天然奢石",
+    "title": "潘多拉1800X900",
+    "titleEn": "Pandora",
+    "size": "3024×4032mm",
+    "imgs": [
+      "1406896_0_800.jpg",
+      "1406896_1_800.jpg",
+      "1406896_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1394276",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸FL001614",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1394276_0_800.jpg",
+      "1394276_1_800.jpg"
+    ]
+  },
+  {
+    "id": "1540408",
+    "l1": "furniture",
+    "cat": "Golden Silk",
+    "title": "Y135Y895+Y80Y896 黄金丝绸135+80",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1540408_0_800.jpg",
+      "1540408_1_800.jpg",
+      "1540408_2_800.jpg",
+      "1540408_3_800.jpg"
+    ]
+  },
+  {
+    "id": "1427566",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1427566_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1553552",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸",
+    "titleEn": "Golden Silk",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1553552_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1523980",
+    "l1": "slab",
+    "cat": "Golden Silk",
+    "title": "黄金丝绸00164",
+    "titleEn": "Golden Silk",
+    "size": "2100×1576mm",
+    "imgs": [
+      "1523980_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1403946",
+    "l1": "furniture",
+    "cat": "Emerald",
+    "title": "祖母绿2000X1000",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403946_0_800.jpg",
+      "1403946_1_800.jpg",
+      "1403946_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1403949",
+    "l1": "furniture",
+    "cat": "Emerald",
+    "title": "祖母绿2000X1000",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1403949_0_800.jpg",
+      "1403949_1_800.jpg",
+      "1403949_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1687358",
+    "l1": "slab",
+    "cat": "Emerald",
+    "title": "祖母绿",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1687358_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1794795",
+    "l1": "furniture",
+    "cat": "Emerald",
+    "title": "祖母绿100X100",
+    "titleEn": "Emerald",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1794795_0_800.jpg",
+      "1794795_1_800.jpg",
+      "1794795_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1524062",
+    "l1": "slab",
+    "cat": "Emerald",
+    "title": "��母绿25722",
+    "titleEn": "Emerald",
+    "size": "2100×1576mm",
+    "imgs": [
+      "1524062_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1400642",
+    "l1": "furniture",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝150+90",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1400642_0_800.jpg",
+      "1400642_1_800.jpg",
+      "1400642_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1427464",
+    "l1": "slab",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝12022",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1427464_0_800.jpg"
+    ]
+  },
+  {
+    "id": "1401048",
+    "l1": "furniture",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝135+80",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1401048_0_800.jpg",
+      "1401048_1_800.jpg",
+      "1401048_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1578099",
+    "l1": "furniture",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝1000X2000",
+    "titleEn": "Dream Blue",
+    "size": "2000×1500mm",
+    "imgs": [
+      "1578099_0_800.jpg",
+      "1578099_1_800.jpg",
+      "1578099_2_800.jpg"
+    ]
+  },
+  {
+    "id": "1555336",
+    "l1": "slab",
+    "cat": "Dream Blue",
+    "title": "梦幻蓝宝",
+    "titleEn": "Dream Blue",
+    "size": "1702×1276mm",
+    "imgs": [
+      "1555336_0_800.jpg"
+    ]
+  }
+];
+
+// 收集所有品类
+const cats = [...new Set(PRODUCTS.map(p=>p.cat))].sort();
+const catSel = document.getElementById('filterCat');
+cats.forEach(c => { const o=document.createElement('option'); o.value=c; o.textContent=c; catSel.appendChild(o); });
+
+const l1Names = { slab:'奢石大板', furniture:'成品家具', accessory:'配件脚架', case:'落地案例' };
+
+// 渲染
+const grid = document.getElementById('grid');
+PRODUCTS.forEach(p => {
+  const imgs = p.imgs.map(i => `<img src="main-images/${i}" alt="${p.title}" loading="lazy" onclick="showDetail('${p.id}')">`).join('');
+  const tag = `<span class="tag tag-${p.l1}">${l1Names[p.l1]||p.l1}</span>`;
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.l1 = p.l1;
+  card.dataset.cat = p.cat;
+  card.dataset.title = (p.title+' '+p.titleEn+' '+p.id).toLowerCase();
+  card.innerHTML = `
+    <div class="card-head">
+      <div class="card-id">ID: ${p.id}</div>
+      <div class="card-title">${p.title}</div>
+      <div class="card-cat">${tag} ${p.cat} · ${p.size.replace(/×/g,'x')}</div>
+    </div>
+    <div class="card-imgs">${imgs}</div>
+    <div class="card-actions">
+      <a class="btn" href="detail-pages/${p.id}_detail.jpg" target="_blank">📄 查看详情页</a>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+function applyFilter() {
+  const l1 = document.getElementById('filterL1').value;
+  const cat = document.getElementById('filterCat').value;
+  const q = document.getElementById('searchBox').value.toLowerCase();
+  let shown = 0;
+  document.querySelectorAll('.card').forEach(c => {
+    const okL1 = !l1 || c.dataset.l1 === l1;
+    const okCat = !cat || c.dataset.cat === cat;
+    const okQ = !q || c.dataset.title.includes(q);
+    if (okL1 && okCat && okQ) { c.classList.remove('hidden'); shown++; }
+    else c.classList.add('hidden');
+  });
+  document.getElementById('stats').textContent = `显示 ${shown} / ${PRODUCTS.length}`;
+}
+applyFilter();
+
+function showDetail(id) {
+  window.open('detail-pages/'+id+'_detail.jpg', '_blank');
+}
+</script>
+</body>
+</html>

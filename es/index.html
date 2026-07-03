@@ -76,6 +76,86 @@ body:not(.lang-cn) .section-title .cn { letter-spacing:1px; }
 .fade-in { opacity:0; transform:translateY(20px); transition:opacity 0.6s, transform 0.6s; }
 .fade-in.visible { opacity:1; transform:translateY(0); }
 
+/* === 询盘转化组件 === */
+:root { --wa:#25D366; --wa-dark:#1da851; }
+
+/* header 询盘渠道组 */
+.inquiry-channels { display:flex; gap:8px; align-items:center; }
+.ch-btn { display:inline-flex; align-items:center; gap:5px; padding:6px 12px; border-radius:20px; font-size:12px; font-weight:600; transition:all 0.2s; white-space:nowrap; }
+.ch-btn .ico { font-size:14px; }
+.ch-wa { background:var(--wa); color:#fff; }
+.ch-wa:hover { background:var(--wa-dark); transform:translateY(-1px); }
+.ch-wx { background:rgba(255,255,255,0.1); color:#fff; border:1px solid rgba(255,255,255,0.3); cursor:pointer; }
+.ch-wx:hover { background:rgba(255,255,255,0.2); }
+.ch-phone { color:var(--gold-light); font-size:13px; font-weight:600; }
+@media (max-width:768px){ .ch-btn{padding:5px 9px;font-size:11px} .ch-btn .lbl{display:none} .ch-phone{display:none} }
+
+/* 浮动询盘按钮 */
+.float-inquiry { position:fixed; right:16px; bottom:80px; z-index:150; display:flex; flex-direction:column; gap:10px; opacity:0; transform:translateY(20px); pointer-events:none; transition:opacity 0.3s,transform 0.3s; }
+.float-inquiry.show { opacity:1; transform:translateY(0); pointer-events:auto; }
+.fi-btn { width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:24px; box-shadow:0 4px 16px rgba(0,0,0,0.25); cursor:pointer; transition:transform 0.2s; border:none; }
+.fi-btn:hover { transform:scale(1.08); }
+.fi-wa { background:var(--wa); }
+.fi-form { background:var(--gold); }
+.fi-wx { background:#07c160; }
+@media (min-width:769px){ .float-inquiry{right:24px;bottom:90px} }
+
+/* 询盘弹窗 */
+.inquiry-modal { display:none; position:fixed; inset:0; z-index:500; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); align-items:center; justify-content:center; padding:20px; }
+.inquiry-modal.open { display:flex; }
+.inquiry-modal-box { background:#fff; border-radius:12px; max-width:460px; width:100%; max-height:90vh; overflow-y:auto; position:relative; }
+.inquiry-modal-close { position:absolute; top:12px; right:16px; font-size:28px; color:#999; cursor:pointer; line-height:1; z-index:2; }
+.inquiry-modal-head { padding:28px 24px 12px; text-align:center; }
+.inquiry-modal-head .t { font-size:20px; font-weight:600; color:var(--dark); }
+.inquiry-modal-head .p { font-size:13px; color:#888; margin-top:6px; }
+.inquiry-modal-head .pname { color:var(--gold); font-weight:600; }
+.inquiry-modal-body { padding:8px 24px 24px; }
+.im-quick { display:flex; gap:10px; margin-bottom:16px; }
+.im-quick a, .im-quick button { flex:1; padding:11px; border-radius:8px; font-size:13px; font-weight:600; text-align:center; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:6px; }
+.im-wa { background:var(--wa); color:#fff; }
+.im-wx { background:#07c160; color:#fff; }
+.im-field { margin-bottom:14px; }
+.im-label { display:block; font-size:12px; color:#555; margin-bottom:5px; font-weight:600; }
+.im-input { width:100%; padding:11px 14px; border:1px solid #ddd; border-radius:6px; font-size:14px; font-family:inherit; }
+.im-input:focus { outline:none; border-color:var(--gold); }
+.im-textarea { min-height:80px; resize:vertical; }
+.im-submit { display:block; width:100%; padding:13px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); color:var(--dark); border:none; border-radius:30px; font-size:14px; font-weight:700; cursor:pointer; }
+.im-submit:hover { transform:translateY(-1px); }
+
+/* 产品卡片询价按钮 */
+.card-inquiry { position:absolute; bottom:10px; right:10px; background:var(--wa); color:#fff; border:none; padding:6px 12px; border-radius:16px; font-size:11px; font-weight:600; cursor:pointer; opacity:0; transition:opacity 0.2s; display:flex; align-items:center; gap:4px; z-index:2; }
+.card:hover .card-inquiry { opacity:1; }
+.card-inquiry:hover { background:var(--wa-dark); }
+body.lang-cn .card-inquiry { background:var(--gold); }
+body.lang-cn .card-inquiry:hover { background:var(--gold-light); color:var(--dark); }
+@media (max-width:768px){ .card-inquiry{opacity:1} }
+
+/* 灯箱询盘CTA */
+.lightbox-cta { margin-top:14px; }
+.lightbox-cta a, .lightbox-cta button { display:inline-flex; align-items:center; gap:6px; padding:11px 24px; border-radius:30px; font-size:14px; font-weight:600; cursor:pointer; border:none; }
+.lightbox-cta .lb-wa { background:var(--wa); color:#fff; }
+.lightbox-cta .lb-form { background:var(--gold); color:var(--dark); margin-left:10px; }
+
+/* 首页询盘入口区 */
+.inquiry-section { background:linear-gradient(135deg,#1a1a1a 0%,#2d2520 100%); padding:60px 24px; color:#fff; text-align:center; }
+.inquiry-section h2 { font-size:clamp(22px,3.5vw,32px); font-weight:400; letter-spacing:3px; margin-bottom:12px; }
+.inquiry-section .sub { color:var(--gold-light); font-size:13px; letter-spacing:2px; margin-bottom:32px; }
+.inquiry-cards { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; max-width:900px; margin:0 auto; }
+.inquiry-card { background:rgba(255,255,255,0.06); border:1px solid rgba(184,150,90,0.3); border-radius:12px; padding:28px 24px; min-width:200px; max-width:260px; flex:1; transition:all 0.2s; cursor:pointer; text-decoration:none; color:#fff; display:block; }
+.inquiry-card:hover { background:rgba(184,150,90,0.15); border-color:var(--gold); transform:translateY(-4px); }
+.inquiry-card .ic-ico { font-size:36px; margin-bottom:12px; }
+.inquiry-card .ic-t { font-size:16px; font-weight:600; margin-bottom:6px; }
+.inquiry-card .ic-d { font-size:12px; color:rgba(255,255,255,0.7); line-height:1.6; }
+
+/* 信任背书区 */
+.trust-section { max-width:1400px; margin:0 auto; padding:60px 24px; }
+.trust-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:20px; }
+.trust-item { text-align:center; padding:28px 20px; background:#fff; border-radius:10px; border:1px solid #eee; transition:transform 0.2s; }
+.trust-item:hover { transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,0.06); }
+.trust-ico { font-size:38px; margin-bottom:12px; line-height:1; }
+.trust-t { font-size:15px; font-weight:600; margin-bottom:6px; }
+.trust-d { font-size:12px; color:#888; line-height:1.6; }
+
 /* hero */
 .hero { position:relative; height:80vh; min-height:480px; display:flex; align-items:center; justify-content:center; text-align:center; color:#fff; overflow:hidden; background:linear-gradient(135deg,#1a1a1a 0%,#3a3025 50%,#1a1a1a 100%); }
 .hero-bg { position:absolute; inset:0; background-image:url('images/hero-bg.jpg'); background-size:cover; background-position:center; opacity:0.55; filter:blur(0px); }
@@ -141,13 +221,20 @@ body:not(.lang-cn) .hero h1 { letter-spacing:2px; font-weight:400; }
     </a>
     <div class="nav-right">
       <nav class="lang-switch"><a class="lang-btn" href="./">中</a><a class="lang-btn" href="./en/">EN</a><a class="lang-btn active" href="#">ES</a><a class="lang-btn" href="./ru/">RU</a></nav>
-      <a class="nav-contact" href="tel:8613923130743">
-        <div class="nav-phone">+86 13923130743</div>
-        <div class="nav-email">apple@whartonstone.com</div>
-      </a>
+      
+      <div class="inquiry-channels">
+        <a class="ch-btn ch-wa" href="https://wa.me/8613923130743?text=Hola%2C%20estoy%20interesado%20en%20sus%20piedras%20de%20lujo" target="_blank" rel="noopener">💬 <span class="lbl">WhatsApp</span></a>
+        <a class="ch-btn ch-phone" href="tel:8613923130743">☎ <span class="lbl">+86 13923130743</span></a>
+      </div>
     </div>
   </div>
 </header>
+<div id="wxTip" style="display:none;position:fixed;top:80px;right:20px;z-index:300;background:#fff;color:#333;padding:16px 20px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,0.15);font-size:13px;line-height:1.8">
+  <span onclick="document.getElementById('wxTip').style.display='none'" style="float:right;cursor:pointer;color:#999;font-size:18px">×</span>
+  <b>添加微信询价</b><br>
+  微信搜索手机号：<b style="color:#b8965a;font-size:16px">13809251691</b><br>
+  <span style="color:#999;font-size:12px">或扫码添加（请提供二维码）</span>
+</div>
 
 <section class="hero">
   <div class="hero-bg"></div>
@@ -291,6 +378,44 @@ body:not(.lang-cn) .hero h1 { letter-spacing:2px; font-weight:400; }
   </div>
 </section>
 
+<section class="inquiry-section">
+  <h2>Solicitar Cotización</h2>
+  <div class="sub">CONTACT US</div>
+  <div class="inquiry-cards">
+    <a class="inquiry-card" href="https://wa.me/8613923130743?text=Hola%2C%20estoy%20interesado%20en%20sus%20piedras%20de%20lujo" target="_blank" rel="noopener">
+      <div class="ic-ico">💬</div>
+      <div class="ic-t">WhatsApp</div>
+      <div class="ic-d">Fastest response</div>
+    </a>
+    <a class="inquiry-card" href="./apply/">
+      <div class="ic-ico">✎</div>
+      <div class="ic-t">Formulario</div>
+      <div class="ic-d">Detailed inquiry, 1-on-1 service</div>
+    </a>
+    <a class="inquiry-card" href="tel:8613923130743">
+      <div class="ic-ico">☎</div>
+      <div class="ic-t">Llamar</div>
+      <div class="ic-d">+86 13923130743</div>
+    </a>
+  </div>
+</section>
+
+<section class="trust-section">
+  <div class="section-title">
+    <div class="cn">Por Qué Elegirnos</div>
+    <div class="line"></div>
+    <div class="en">OUR ADVANTAGES</div>
+  </div>
+  <div class="trust-grid">
+    <div class="trust-item"><div class="trust-ico">🏭</div><div class="trust-t">Factory Direct</div><div class="trust-d">Direct supplier, no middleman</div></div>
+    <div class="trust-item"><div class="trust-ico">🌍</div><div class="trust-t">Global Export</div><div class="trust-d">Serving global clients, export experts</div></div>
+    <div class="trust-item"><div class="trust-ico">💎</div><div class="trust-t">200+ In Stock</div><div class="trust-d">Abundant slabs in stock, fast delivery</div></div>
+    <div class="trust-item"><div class="trust-ico">✂️</div><div class="trust-t">Custom Processing</div><div class="trust-d">Custom sizes & shapes available</div></div>
+    <div class="trust-item"><div class="trust-ico">✅</div><div class="trust-t">Quality Guaranteed</div><div class="trust-d">Natural stone, each piece unique</div></div>
+    <div class="trust-item"><div class="trust-ico">🚚</div><div class="trust-t">Pro Logistics</div><div class="trust-d">Safe packaging, worldwide shipping</div></div>
+  </div>
+</section>
+
 <a class="case-banner" href="products/?cat=case">
   <img src="images/1441821_0.jpg" alt="Casos de Implementación" loading="lazy">
   <div class="case-banner-overlay"></div>
@@ -317,6 +442,61 @@ body:not(.lang-cn) .hero h1 { letter-spacing:2px; font-weight:400; }
   <a href="./" class="active"><span class="bn-ico">⌂</span><span class="bn-lbl">首页</span></a><a href="./products/" class=""><span class="bn-ico">⊙</span><span class="bn-lbl">产品</span></a><a href="./apply/" class=""><span class="bn-ico">✎</span><span class="bn-lbl">申请</span></a>
 </nav>
 
+<div class="float-inquiry" id="floatInquiry">
+  <a class="fi-btn fi-wa" href="https://wa.me/8613923130743?text=Hola%2C%20estoy%20interesado%20en%20sus%20piedras%20de%20lujo" target="_blank" rel="noopener" title="WhatsApp Inquiry">💬</a>
+  <button class="fi-btn fi-form" onclick="openInquiryModal()" title="Inquiry Form">✎</button>
+</div>
+
+<div class="inquiry-modal" id="inquiryModal">
+  <div class="inquiry-modal-box">
+    <span class="inquiry-modal-close" onclick="closeInquiryModal()">×</span>
+    <div class="inquiry-modal-head">
+      <div class="t">Solicitar Cotización</div>
+      <div class="p">Complete el formulario</div>
+      <div class="pname" id="imPname" style="display:none"></div>
+    </div>
+    <div class="inquiry-modal-body">
+      <div class="im-quick">
+        <a class="im-wa" href="https://wa.me/8613923130743?text=Hola%2C%20estoy%20interesado%20en%20sus%20piedras%20de%20lujo" target="_blank" rel="noopener" id="imWaBtn">💬 WhatsApp</a>
+      </div>
+      <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+        <input type="hidden" name="_subject" value="[贝奈利奢石] 询盘 - es">
+        <input type="hidden" name="product" id="imProductField" value="">
+        <div class="im-field">
+          <label class="im-label">Nombre *</label>
+          <input class="im-input" type="text" name="name" required placeholder="Su nombre">
+        </div>
+        <div class="im-field">
+          <label class="im-label">Teléfono/WhatsApp *</label>
+          <input class="im-input" type="text" name="phone" required placeholder="Contacto">
+        </div>
+        <div class="im-field">
+          <label class="im-label">Mensaje</label>
+          <textarea class="im-input im-textarea" name="message" placeholder="Necesidades"></textarea>
+        </div>
+        <button class="im-submit" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+function openInquiryModal(productName){
+  var m=document.getElementById('inquiryModal');
+  if(!m)return;
+  if(productName){
+    document.getElementById('imPname').style.display='block';
+    document.getElementById('imPname').textContent='📋 '+productName;
+    document.getElementById('imProductField').value=productName;
+    var wa=document.getElementById('imWaBtn');
+    wa.href='https://wa.me/8613923130743?text=Hola%2C%20estoy%20interesado%20en%20sus%20piedras%20de%20lujo%3A%20__PRODUCT__'.replace('__PRODUCT__',encodeURIComponent(productName));
+  }
+  m.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeInquiryModal(){var m=document.getElementById('inquiryModal');if(m){m.classList.remove('open');document.body.style.overflow='';}}
+document.addEventListener('click',function(e){if(e.target&&e.target.id==='inquiryModal'){closeInquiryModal();}});
+window.addEventListener('scroll',function(){var fi=document.getElementById('floatInquiry');if(!fi)return;if(window.scrollY>400){fi.classList.add('show');}else{fi.classList.remove('show');}});
+</script>
+
 <div class="lightbox" id="lightbox">
   <div class="lightbox-close" id="lbClose">×</div>
   <div class="lightbox-content">
@@ -325,6 +505,7 @@ body:not(.lang-cn) .hero h1 { letter-spacing:2px; font-weight:400; }
       <div class="cn" id="lbTitleCn"></div>
       <div class="en" id="lbTitleEn"></div>
       <div class="cat" id="lbCat"></div>
+      <div class="lightbox-cta" id="lbCta"></div>
     </div>
     <div class="lightbox-nav" id="lbNav" style="display:none">
       <button class="lb-nav-btn" id="lbPrev">‹</button>
