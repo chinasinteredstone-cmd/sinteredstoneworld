@@ -1,8 +1,8 @@
-# robots.txt for https://www.sinteredstoneworld.com
+# robots.txt for sinteredstoneworld.com
 User-agent: *
 Allow: /
 
-# 允许所有主流搜索引擎/AI 爬虫
+# 主流搜索引擎
 User-agent: Googlebot
 Allow: /
 User-agent: Bingbot
@@ -13,6 +13,7 @@ User-agent: YandexBot
 Allow: /
 User-agent: Sogou web spider
 Allow: /
+
 # AI 搜索引擎（GEO 友好）
 User-agent: GPTBot
 Allow: /
@@ -22,6 +23,9 @@ User-agent: PerplexityBot
 Allow: /
 User-agent: Google-Extended
 Allow: /
+User-agent: CCBot
+Allow: /
 
 # 站点地图
-Sitemap: https://www.sinteredstoneworld.com/sitemap.xml
+Sitemap: https://sinteredstoneworld.com/sitemap.xml
+Host: https://sinteredstoneworld.com
