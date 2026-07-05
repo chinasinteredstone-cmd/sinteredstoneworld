@@ -252,5 +252,23 @@ document.querySelectorAll('.lang-btn').forEach(b => {
 
 renderLang();
 </script>
+
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y84QWFBKWX"></script>
+<script>
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-Y84QWFBKWX');
+document.addEventListener('click',function(e){
+  var t=e.target.closest('a');if(!t)return;
+  var href=t.getAttribute('href')||'';
+  if(href.indexOf('wa.me')>=0||href.indexOf('whatsapp')>=0){gtag('event','whatsapp_click',{event_category:'inquiry',event_label:'whatsapp'})}
+  if(href.indexOf('mailto:')>=0){gtag('event','email_click',{event_category:'inquiry',event_label:'email'})}
+},true);
+document.addEventListener('submit',function(e){
+  if(e.target&&(e.target.getAttribute('action')||'').indexOf('formspree')>=0){gtag('event','contact_form_submit',{event_category:'inquiry',event_label:'form'})}
+},true);
+</script>
 </body>
 </html>
