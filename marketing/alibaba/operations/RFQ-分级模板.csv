@@ -1,0 +1,5 @@
+产品ID,ID,询盘日期,客户公司,客户国家,客户类型,产品线,规格明确,数量明确,提及项目,问价格,问样品,问交期,询盘字数,24h内回复,意向关键词命中,总分,建议等级,跟进动作
+（示例数据，删除后填真实数据）,RFQ-001,2026-07-01,ABC Trading,United States,Importer,Sintered Stone,1,1,1,1,0,1,80,1,5,,,
+（示例数据）,RFQ-002,2026-07-02,XYZ Construction,Australia,Contractor,Flexible Stone,1,0,1,1,1,0,60,1,4,,,
+（示例数据）,RFQ-003,2026-07-03,QWE Distributor,Germany,Distributor,Porcelain Slab,0,1,0,1,0,0,30,0,2,,,
+（示例数据）,RFQ-004,2026-07-03,个体买家,United Kingdom,Designer,Soft Ceramic,0,0,0,0,1,0,20,0,1,,,

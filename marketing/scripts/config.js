@@ -39,6 +39,12 @@ module.exports = {
     outputRoot: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/alibaba',
     mainImages: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/alibaba/main-images',
     detailPages: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/alibaba/detail-pages',
+    // 小红书发布相关
+    xhs: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/xiaohongshu',
+    xhsCopy: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/xiaohongshu/xhs-copy.csv',
+    xhsState: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/xiaohongshu/publish-state.json',
+    xhsLog: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/xiaohongshu/xhs-publish.log',
+    xhsReports: 'C:/Users/AppleLo/ZCodeProject/sinteredstoneworld/marketing/xiaohongshu/reports',
   },
 
   // ===== 阿里巴巴国际站规格 =====
