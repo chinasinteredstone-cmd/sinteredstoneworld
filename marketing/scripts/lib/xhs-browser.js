@@ -17,6 +17,9 @@ const fs = require('fs');
 /** agent-browser 命令前缀（含 session 复用） */
 const SESSION = 'xhs';
 
+// 默认超时：单条命令。注意 daemon 冷启动第一次可能很慢，所以给宽裕。
+const DEFAULT_TIMEOUT = 180000;
+
 /**
  * 调 agent-browser，返回 stdout（trim 后）
  * @param {...string} args
@@ -26,10 +29,14 @@ function runAB(...args) {
   const fullArgs = ['--session', SESSION, ...args];
   const res = spawnSync('agent-browser', fullArgs, {
     encoding: 'utf-8',
-    timeout: 120000,
-    shell: true, // Windows 下需要
+    timeout: DEFAULT_TIMEOUT,
+    shell: true, // Windows 下 .cmd shim 必须用 shell
+    windowsHide: true,
   });
-  if (res.error) throw new Error(`agent-browser 调用失败: ${res.error.message}`);
+  if (res.error) {
+    if (res.signal === 'SIGTERM') throw new Error(`agent-browser 超时（>${DEFAULT_TIMEOUT / 1000}s）: ${args.join(' ')}`);
+    throw new Error(`agent-browser 调用失败: ${res.error.message}`);
+  }
   if (res.status !== 0) {
     const tail = (res.stderr || res.stdout || '').slice(-300);
     throw new Error(`agent-browser 退出码 ${res.status}: ${tail}`);
