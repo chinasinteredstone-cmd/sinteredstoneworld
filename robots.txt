@@ -29,3 +29,13 @@ Allow: /
 # 站点地图
 Sitemap: https://sinteredstoneworld.com/sitemap.xml
 Host: https://sinteredstoneworld.com
+User-agent: anthropic-ai
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+User-agent: Bytespider
+Allow: /
+
+# AI content index
+# llms.txt: https://sinteredstoneworld.com/llms.txt
+# llms-full.txt: https://sinteredstoneworld.com/llms-full.txt

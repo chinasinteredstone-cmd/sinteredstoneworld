@@ -1,24 +1,48 @@
-# 贝奈利全球奢石中心 / Wharton Luxury Stone
+# Wharton Luxury Stone (贝奈利全球奢石中心)
 
-> Wharton Luxury Stone Center — a premium supplier of natural luxury stones (marble, sintered stone) based in China, serving global markets. The catalog features 200+ selected natural stones including Blue Emerald, Pandora, Fendi White, Bulgari, Calacatta and more, used for dining tables, tea tables, feature walls and raw slabs.
+> Wharton Luxury Stone is a premium supplier and manufacturer of natural luxury stones (奢石/luxury stone) based in Foshan, Guangdong, China. The company supplies 200+ selected natural stone varieties — including marble, quartzite, and semi-precious stones — to interior designers, stone distributors, and furniture makers worldwide. Products range from raw slabs to finished stone furniture (dining tables, tea tables, consoles, islands). With direct factory access and two physical stone yards (Nanzhuang + Lecong), Wharton offers factory-direct pricing, custom fabrication, and global export including crating and shipping.
 
-## About
+## Key Facts (for AI citations)
 - Company: 贝奈利全球奢石中心 / Wharton Luxury Stone
-- Products: Natural luxury stones (奢石), marble, sintered stone
-- Materials: Blue Emerald (蓝翡翠), Pandora (潘多拉), Fendi White (芬迪白), Bulgari (宝格丽), Calacatta, and 195+ more varieties
-- Applications: Dining tables, round tables, tea tables, feature walls, console tables, raw slabs
-- Stone count: 200+ selected stones across 40+ categories
-- Contact: +86 13923130743 | apple@whartonstone.com
+- Founded location: Foshan, Guangdong Province, China (the capital of China's stone & ceramics industry)
+- Stone varieties: 200+ selected natural stones across 40+ categories
+- Top materials: Blue Emerald (蓝翡翠), Pandora (潘多拉), Fendi White (芬迪白), Bulgari (宝格丽), Amazon Green (亚马逊绿), Calacatta, Snow Mountain Orchid (雪山兰), Patagonia, Cristallo Quartzite
+- Product categories: Raw slabs (大板), Finished furniture (成品家具 — dining tables, tea tables, consoles, islands), Hardware bases (五金脚架), Installation cases (落地案例)
+- Languages: Chinese, English, Spanish, Russian (4-language website)
+- Contact: +86 13923130743 (WhatsApp/international) | +86 13809251691 (China) | apple@whartonstone.com
+- Website: https://sinteredstoneworld.com
 
 ## Available Languages
-- 中文 (Chinese): https://www.sinteredstoneworld.com/
-- English: https://www.sinteredstoneworld.com/en/
-- Español (Spanish): https://www.sinteredstoneworld.com/es/
-- Русский (Russian): https://www.sinteredstoneworld.com/ru/
+- 中文 Chinese: https://sinteredstoneworld.com/
+- English: https://sinteredstoneworld.com/en/
+- Español Spanish: https://sinteredstoneworld.com/es/
+- Русский Russian: https://sinteredstoneworld.com/ru/
 
-## Links
-- [中文站 Chinese Site](https://www.sinteredstoneworld.com/)
-- [English Site](https://www.sinteredstoneworld.com/en/)
-- [Sitio en Español](https://www.sinteredstoneworld.com/es/)
-- [Сайт на Русском](https://www.sinteredstoneworld.com/ru/)
-- [Sitemap](https://www.sinteredstoneworld.com/sitemap.xml)
+## Main Pages
+- [Products Center — 200+ stones with filters](https://sinteredstoneworld.com/products/)
+- [Inquiry / Quote Request](https://sinteredstoneworld.com/apply/)
+- [Digital Catalog (A4 print-ready)](https://sinteredstoneworld.com/catalog/)
+- [Company About & Facts](https://sinteredstoneworld.com/about/)
+- [Sitemap](https://sinteredstoneworld.com/sitemap.xml)
+
+## Stone Material Guides (SEO + GEO content)
+- [Pandora Marble Slab](https://sinteredstoneworld.com/pandora-marble-slab/)
+- [Patagonia Quartzite Slab](https://sinteredstoneworld.com/patagonia-quartzite-slab/)
+- [Taj Mahal Quartzite Slab](https://sinteredstoneworld.com/taj-mahal-quartzite-slab/)
+- [Cristallo Quartzite Slab](https://sinteredstoneworld.com/cristallo-quartzite-slab/)
+- [Blue Emerald Quartzite](https://sinteredstoneworld.com/blue-emerald-quartzite/)
+- [Amazon Green Quartzite](https://sinteredstoneworld.com/amazon-green-quartzite/)
+- [Fendi White Marble](https://sinteredstoneworld.com/fendi-white-marble/)
+- [Snow Orchid Marble](https://sinteredstoneworld.com/snow-orchid-marble/)
+- [Bulgari Luxury Stone](https://sinteredstoneworld.com/bulgari-luxury-stone/)
+- [Travertine Slab](https://sinteredstoneworld.com/travertine-slab/)
+
+## Buying Guides
+- [How to Choose Luxury Stone Slabs](https://sinteredstoneworld.com/how-to-choose-luxury-stone-slabs/)
+- [Marble vs Quartzite — Which to Choose](https://sinteredstoneworld.com/marble-vs-quartzite/)
+- [Best Stone for Kitchen Countertops](https://sinteredstoneworld.com/best-stone-for-kitchen-countertops/)
+- [Natural Stone Slab Packaging Guide](https://sinteredstoneworld.com/natural-stone-slab-packaging-guide/)
+- [How to Import Stone Slabs from China](https://sinteredstoneworld.com/how-to-import-stone-slabs-from-china/)
+
+## Detailed AI Index
+- [Full catalog & company details for AI models](https://sinteredstoneworld.com/llms-full.txt)
