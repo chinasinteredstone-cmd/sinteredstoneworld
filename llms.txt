@@ -48,3 +48,4 @@
 
 ## Detailed AI Index
 - [Full catalog & company details for AI models](https://sinteredstoneworld.com/llms-full.txt)
+- [中文 AI 索引（国产AI：文心/通义/Kimi/DeepSeek）](https://sinteredstoneworld.com/llms-cn.txt)

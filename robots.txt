@@ -1,23 +1,47 @@
 # robots.txt for sinteredstoneworld.com
+# 全球 + 中国市场 GEO 友好
+
 User-agent: *
 Allow: /
 
-# 主流搜索引擎
+# ===== 国际搜索引擎 =====
 User-agent: Googlebot
 Allow: /
 User-agent: Bingbot
 Allow: /
+User-agent: YandexBot
+Allow: /
+User-agent: Applebot
+Allow: /
+
+# ===== 中国搜索引擎 =====
 User-agent: Baiduspider
 Allow: /
-User-agent: YandexBot
+User-agent: Baiduspider-render
 Allow: /
 User-agent: Sogou web spider
 Allow: /
+User-agent: Sogou inst spider
+Allow: /
+User-agent: Sogou spider2
+Allow: /
+User-agent: 360Spider
+Allow: /
+User-agent: HaosouSpider
+Allow: /
+User-agent: YisouSpider
+Allow: /
+User-agent: YodaoBot
+Allow: /
+User-agent: Bytespider
+Allow: /
 
-# AI 搜索引擎（GEO 友好）
+# ===== 海外 AI 搜索引擎（GEO） =====
 User-agent: GPTBot
 Allow: /
 User-agent: ClaudeBot
+Allow: /
+User-agent: anthropic-ai
 Allow: /
 User-agent: PerplexityBot
 Allow: /
@@ -25,17 +49,18 @@ User-agent: Google-Extended
 Allow: /
 User-agent: CCBot
 Allow: /
-
-# 站点地图
-Sitemap: https://sinteredstoneworld.com/sitemap.xml
-Host: https://sinteredstoneworld.com
-User-agent: anthropic-ai
-Allow: /
 User-agent: Applebot-Extended
 Allow: /
-User-agent: Bytespider
+
+# ===== 中国 AI / 内容平台爬虫 =====
+User-agent: Yisouspider
+Allow: /
+User-agent: PetalBot
 Allow: /
 
-# AI content index
+# ===== 站点地图 =====
+Sitemap: https://sinteredstoneworld.com/sitemap.xml
+
+# ===== AI 内容索引（GEO） =====
 # llms.txt: https://sinteredstoneworld.com/llms.txt
 # llms-full.txt: https://sinteredstoneworld.com/llms-full.txt
